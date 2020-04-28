@@ -14,9 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import bean.User;
 import dao.UserDao;
 
-@WebServlet("/listalluser")
+@WebServlet("/admin/listalluser")
 public class ListAllUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 
 	UserDao myUserDao;
 	List<User> listUser;
@@ -59,7 +60,7 @@ public class ListAllUserServlet extends HttpServlet {
 
 		listUser = myUserDao.getAllRecords();
 		request.setAttribute("list", listUser);
-		RequestDispatcher rd = request.getRequestDispatcher("viewusers.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/viewusers.jsp");
 		rd.forward(request, response);
 	}
 

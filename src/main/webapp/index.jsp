@@ -7,6 +7,6 @@
 <title>Authentification</title>
 </head>
 <body>
-<p><a href="login">Authentification</a></p>
+<p><a href="login">AUTHENTIFICATION</a></p>
 </body>
 </html>

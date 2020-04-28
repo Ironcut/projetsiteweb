@@ -5,11 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../design.css" />
-<title>Success</title>
+<title>Error</title>
 </head>
 
-
-	<h2>Operation sur la table effectuée</h2>
+	<h2>Vous n'avez pas les droits pour effectuer cette opération</h2>
 
 <p><a href="listalluser">Retour à la liste</a></p>
 

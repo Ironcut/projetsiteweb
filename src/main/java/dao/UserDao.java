@@ -67,7 +67,7 @@ public class UserDao {
 			while (rs.next()) {
 				if (rs.getString(4).equals(mp)) {
 					u = new User();
-					u.setId(rs.getInt(1));
+					u.setId(rs.getString(1));
 					u.setNom(rs.getString(2));
 					u.setPrenom(rs.getString(3));
 					u.setMp(rs.getString(4));
@@ -89,7 +89,7 @@ public class UserDao {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				User u = new User();
-				u.setId(rs.getInt(1));
+				u.setId(rs.getString(1));
 				u.setNom(rs.getString(2));
 				u.setPrenom(rs.getString(3));
 				u.setMp(rs.getString(4));
@@ -109,7 +109,7 @@ public class UserDao {
 		try {
 			PreparedStatement ps = con
 					.prepareStatement("INSERT INTO users (id,nom, prenom, motdepasse) values (?,?,?,?)");
-			ps.setInt(1, u.getId());
+			ps.setString(1, u.getId());
 			ps.setString(2, u.getNom());
 			ps.setString(3, u.getPrenom());
 			ps.setString(4, u.getMp());
@@ -131,7 +131,7 @@ public class UserDao {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				u = new User();
-				u.setId(rs.getInt("id"));
+				u.setId(rs.getString("id"));
 				u.setNom(rs.getString("nom"));
 				u.setPrenom(rs.getString("prenom"));
 				u.setMp(rs.getString("motdepasse"));
@@ -150,7 +150,7 @@ public class UserDao {
 		try {
 			con = UserDao.getConnection();
 			PreparedStatement ps = con.prepareStatement("DELETE FROM users WHERE id=?");
-			ps.setInt(1, u.getId());
+			ps.setString(1, u.getId());
 			status = ps.executeUpdate();
 			closeConnexion(con);
 		} catch (SQLException e) {
@@ -160,22 +160,23 @@ public class UserDao {
 		return status;
 	}
 
-//	public static int update(User u) {
-//		int status = 0;
-//		Connection con = null;
-//		try {
-//			con = UserDao.getConnection();
-//			PreparedStatement ps = con.prepareStatement("UPDATE users set id=?, nom=?, prenom=?, motdepasse=?");
-//			ps.setInt(1, u.getId());
-//			ps.setString(2, u.getNom());
-//			ps.setString(3, u.getPrenom());
-//			ps.setString(4, u.getMp());
-//			status = ps.executeUpdate();
-//			closeConnexion(con);
-//		} catch (SQLException e) {
-//			System.out.println(e.getMessage());
-//		}
-//		return status;
-//	}
-//	
+	public static int update(User u) {
+		int status = 0;
+		Connection con = null;
+		try {
+			con = UserDao.getConnection();
+			PreparedStatement ps = con.prepareStatement("UPDATE users set nom=?, prenom=?, motdepasse=? WHERE id=?");
+			
+			ps.setString(1, u.getNom());
+			ps.setString(2, u.getPrenom());
+			ps.setString(3, u.getMp());
+			ps.setString(4, u.getId());
+			status = ps.executeUpdate();
+			closeConnexion(con);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return status;
+	}
+	
 }
